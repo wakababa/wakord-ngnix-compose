@@ -15,13 +15,13 @@ services:
       - backend
     restart: unless-stopped
 
-  frontend:
+  wakords-frontend:
     build:
       context: ./frontend
     container_name: wakords-frontend
     restart: unless-stopped
 
-  backend:
+  wakords-backend:
     build:
       context: ./backend
     container_name: wakords-backend
