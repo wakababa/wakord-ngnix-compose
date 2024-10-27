@@ -11,8 +11,8 @@ services:
       - /etc/letsencrypt/live/wakords.com-0002/privkey.pem:/etc/ssl/private/privkey.pem:ro
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
-      - frontend
-      - backend
+      - wakords-frontend
+      - wakords-backend
     restart: unless-stopped
 
   wakords-frontend:
