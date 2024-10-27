@@ -7,7 +7,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./frontend/dist:/usr/share/nginx/html
+      - shared-volume:/usr/share/nginx/html
       - /etc/letsencrypt/live/wakords.com-0002/fullchain.pem:/etc/ssl/certs/fullchain.pem:ro
       - /etc/letsencrypt/live/wakords.com-0002/privkey.pem:/etc/ssl/private/privkey.pem:ro
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
@@ -21,7 +21,7 @@ services:
       context: ./wakord-frontend
     container_name: wakords-frontend
     volumes:
-      - ./frontend/dist:/usr/share/nginx/html
+      - shared-volume:/usr/share/nginx/html  # shared-volume ile build çıktısını nginx'e aktarıyoruz
     restart: unless-stopped
 
   wakords-backend:
@@ -31,5 +31,8 @@ services:
     environment:
       - PORT=3000
     expose:
-      - "3000" # Sadece container içinde kullanılacağı için expose kullanıldı
+      - "3000"
     restart: unless-stopped
+
+volumes:
+  shared-volume:
